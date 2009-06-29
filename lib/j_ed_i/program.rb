@@ -84,7 +84,6 @@ module JEdI
       
     def fire_delta_v
       calculate_hohmann_transfer
-      # thrust(*apply_thrust(@delta_v))
       delta_x, delta_y = apply_thrust(@delta_v)
       thrust(-delta_x, -delta_y)
       @mode = :fire_delta_v_prime
@@ -104,8 +103,6 @@ module JEdI
     
     def fire_delta_v_prime
       if (@time_to_prime -= 1) <= 0
-        # delta_x, delta_y = apply_thrust(@delta_v_prime)
-        # thrust(-delta_x, -delta_y)
         thrust(*apply_thrust(@delta_v_prime))
         @mode = :coast
       else
