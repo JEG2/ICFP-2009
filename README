@@ -8,6 +8,8 @@ We have participated in previous years with the help of our friends:
     http://grayproductions.net/icfp07/
     http://grayproductions.net/icfp04/
 
+This year we also owe a huge thanks to Luke DeWitt for holding our hands through the scary math.  He's an honorary team member this year.  Thanks buddy!
+
 We had pretty limited time this year and less help, so this solution only works for five of the provided scenarios.  You can run those with these commands from the root project directory:
 
     bin/j_ed_i 1001
@@ -16,7 +18,7 @@ We had pretty limited time this year and less help, so this solution only works 
     bin/j_ed_i 1004
     bin/j_ed_i 2001
 
-Each run generates images and solutions, in the so named directories.  This code requires a Ruby 1.8 install (only tested with 1.8.6).
+Each run generates images (SVG graphics some browsers can display) and solutions, in the so named directories.  This code requires a Ruby 1.8 install (only tested with 1.8.6).
 
 You can also see movies we have recorded of the solutions in the videos directory.  These are just animated Gif files that should be viewable in most modern browsers.  The two without scenario number names are our best bloopers recorded from buggy runs.
 
