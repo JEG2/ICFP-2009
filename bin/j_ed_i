@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby -wKU
+
+$LOAD_PATH << File.join(File.dirname(__FILE__), *%w[.. lib])
+require "j_ed_i"
+
+options = {:configuarion => nil, :svg => true, :frequency => 500}
+ARGV.options do |opts|
+  opts.banner = "Usage:  #{File.basename($PROGRAM_NAME)} [OPTIONS] CONFIG"
+  opts.separator ""
+  opts.separator "Specific Options:"
+  opts.on( "-s", "--[no-]svg",
+           "Used to turn off image generation." ) do |svg|
+    options[:svg] = svg
+  end
+  opts.on( "-f", "--frequency TURNS", Integer,
+           "The turn frequency of image generation." ) do |frequency|
+    if frequency < 1
+      options[:svg] = false
+    else
+      options[:frequency] = frequency
+    end
+  end
+  opts.separator "Common Options:"
+  opts.on( "-h", "--help",
+           "Show this message." ) do
+    puts opts
+    exit
+  end
+  begin
+    opts.parse!
+    raise unless configuarion = ARGV.shift
+    options[:configuarion] = configuarion.to_i
+  rescue
+    puts opts
+    exit
+  end
+end
+
+if options[:svg] and (JEdI::IMAGES_DIR + "0000000000.svg").exist?
+  system("rm #{JEdI::IMAGES_DIR + '*.svg'}")
+end
+
+unless program_class = JEdI::Program.for_configuration(options[:configuarion])
+  abort "Error:  CONFIG not recognized."
+end
+program = program_class.new(options[:configuarion], options)
+program.run
+puts "\aFinal Score:  #{program.score}"
